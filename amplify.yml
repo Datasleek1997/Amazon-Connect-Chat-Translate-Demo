@@ -5,6 +5,8 @@ backend:
       commands:
         - '# Execute Amplify CLI with the helper script'
         - REACT_APP_CONNECT_INSTANCE_ID=$REACT_APP_CONNECT_INSTANCE_ID
+        - npm uninstall @aws-amplify/cli
+        - npm install @aws-amplify/cli@10.8.1
         - amplifyPush --simple
 frontend:
   phases:
