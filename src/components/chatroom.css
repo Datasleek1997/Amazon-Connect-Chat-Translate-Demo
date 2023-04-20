@@ -8,21 +8,23 @@ p {
 }
 
 #chatroom {
-  height:485px;
-  padding-top: 15px;
-  padding-left: 15px;
+  height:500px;
+    margin-left: 13px;
+
 }
 
 .App {
 
   display: flex;
   align-items: center;
-  justify-content: center;
+/*   justify-content: center; */
+  justify-content:space-evenly;
 }
 
 .chatroom {
-  width: 335px;
-  height: 485px;
+
+  height: 500px;
+
   background-color: #FFFFFF;
   border-radius: 5px;
   overflow: hidden;
@@ -30,7 +32,7 @@ p {
 }
 
 .chatroom h3 {
-  background-color: #4A4A4A;
+    background-color: #1947c8;
   color: #FFF;
   margin: 0;
   height: 40px;
@@ -44,7 +46,7 @@ p {
   box-sizing: border-box;
   padding: 0 20px;
   margin: 10px 0 0;
-  height: 395px;
+  height: 410px;
   overflow-y: scroll;
 }
 
@@ -129,4 +131,45 @@ p {
 .chatroom .input input[type="submit"]:hover {
   background: #4A4A4A;
   color: #FFF;
+}
+
+.DepositionContainer{
+      height: 500px;
+    /* padding-top: 15px; */
+    /* padding-left: 15px; */
+    border: 2px solid grey;
+    width: 340px;
+    background: white;
+}
+.Depositionheader{
+  background-color: #dd7016;
+  color: #fff;
+  margin: 0;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.DepositionCode{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: start;
+  margin-top:14px;
+}
+
+.DepositionCode button{
+  border:none;
+  font-size:1rem; 
+  padding: 7px;
+  background: none;
+}
+.DepositionCode button:hover{
+  background-color: #4a4a4a;
+  color: #fff;
+  cursor: pointer;
+}
+#Depositioncontainer{
+  margin-left:13px;
 }
