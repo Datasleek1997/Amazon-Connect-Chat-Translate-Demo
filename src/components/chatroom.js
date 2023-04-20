@@ -11,8 +11,10 @@ const Chatroom = (props) => {
     const [Chats] = useGlobalState('Chats');
     const currentContactId = useGlobalState('currentContactId');
     const [newMessage, setNewMessage] = useState("");
+     const [selectedValue, setSelectedValue] = useState("");
     const [languageTranslate] = useGlobalState('languageTranslate');
     const [languageOptions] = useGlobalState('languageOptions');
+    const [dropdowndata, setDropdowndata] = useState([]); 
     const agentUsername = "AGENT";
     const messageEl = useRef(null);
     const input = useRef(null);
@@ -101,12 +103,23 @@ const Chatroom = (props) => {
         }
         sendMessage(session, translatedMessage);
     }
-
+ const handleChange2 = (event) => {
+    setSelectedValue(event.target.value);
+    setNewMessage(event.target.value)
+  };
+  const url ="https://7ihptajn1a.execute-api.us-east-1.amazonaws.com/default/qna"
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => setDropdowndata(json.items))
+      .catch((error) => console.error(error))
+}, [])
 
 
     return (
+        <>
         <div className="chatroom">
-                <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
+                <h3>Translation - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
                 <ul className="chats" ref={messageEl}>
                 {
                         // iterate over the Chats, and only display the messages for the currently active chat session
@@ -125,10 +138,20 @@ const Chatroom = (props) => {
                           value={newMessage}
                           onChange={e => setNewMessage(e.target.value)}
                         />
+ 
+      <select value={selectedValue} onChange={handleChange2}>
+      <option value=" ">Select</option>
+      {dropdowndata.map(option => (
+        <option key={option.category} value={option.category}>{option.category}</option>
+      ))}
+      </select>
+    
+
                     <input type="submit" value="Submit" />
                 </form>
  
             </div>
+</>
     );
 };
 
