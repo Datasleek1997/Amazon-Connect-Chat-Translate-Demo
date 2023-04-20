@@ -7,6 +7,7 @@ import Chatroom from './chatroom';
 import translateText from './translate'
 import detectText from './detectText'
 import { addChat, setLanguageTranslate, clearChat, useGlobalState, setCurrentContactId } from '../store/state';
+import Deposition from './Deposition';
 
 Amplify.configure(awsconfig);
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
@@ -104,6 +105,7 @@ const Ccp = () => {
 
                 // This is invoked when CCP is ringing
                 contact.onConnecting(() => {
+                    localStorage.setItem('myKey', contact.contactId);
                     console.log("CDEBUG ===> onConnecting() >> contactId: ", contact.contactId);
                     let contactAttributes = contact.getAttributes();
                     console.log("CDEBUG ===> contactAttributes: ", JSON.stringify(contactAttributes));
@@ -150,6 +152,7 @@ const Ccp = () => {
                 // This is invoked when the agent moves to ACW
                 contact.onEnded(() => {
                     console.log("CDEBUG ===> onEnded() >> contactId: ", contact.contactId);
+                    localStorage.removeItem('myKey');
                 });
                 
                 // This is invoked when the agent moves out of ACW to a different state
@@ -214,6 +217,9 @@ const Ccp = () => {
             <div id="ccp-container"></div>
             {/* Translate window will laod here. We pass the agent state to be able to use this to push messages to CCP */}
             <div id="chatroom" ><Chatroom session={agentChatSessionState}/> </div> 
+<div id="Depositioncontainer">
+     <Deposition />
+    </div>
             </Grid.Row>
           </Grid>
         </main>
