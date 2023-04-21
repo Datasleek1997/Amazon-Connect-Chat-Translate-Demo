@@ -43,7 +43,7 @@ function Deposition() {
     <>
       <div className="DepositionContainer">
         <div className="Depositionheader">
-          <p>Deposition</p>
+          <p>Disposition</p>
         </div>
         {loading ? (
           <div className="DepositionCode">Loading...</div>
