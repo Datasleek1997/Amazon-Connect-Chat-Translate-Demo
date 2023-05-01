@@ -107,11 +107,19 @@ const Chatroom = (props) => {
     setSelectedValue(event.target.value);
     setNewMessage(event.target.value)
   };
-  const url ="https://7ihptajn1a.execute-api.us-east-1.amazonaws.com/default/qna"
+  const apiKey = "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C"
+  const headers = new Headers();
+  headers.append("x-api-key", apiKey);
+  const url ="https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/qna";
+  const request = new Request(url, {
+    method: "GET",
+    headers: headers,
+  });
+ 
   useEffect(() => {
-    fetch(url)
+    fetch(request)
       .then((response) => response.json())
-      .then((json) => setDropdowndata(json.items))
+      .then((json) => setDropdowndata(json.msg.Items))
       .catch((error) => console.error(error))
 }, [])
 
