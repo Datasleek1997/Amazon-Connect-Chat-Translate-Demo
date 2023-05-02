@@ -103,10 +103,26 @@ const Chatroom = (props) => {
         }
         sendMessage(session, translatedMessage);
     }
- const handleChange2 = (event) => {
+
+const handleChange2 = (event) => {
     setSelectedValue(event.target.value);
-    setNewMessage(event.target.value)
+    const urlq = `https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/softphoneqna?category=${e.target.value}`;
+    const headers = new Headers();
+    headers.append("x-api-key", "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C");
+    const request = new Request(urlq, {
+      method: "GET",
+      headers: headers,
+    });
+
+    fetch(request)
+      .then((response) => response.json())
+      .then((json) => setNewMessage(json.items.reply))
+
+      .catch((error) => console.error(error));
   };
+console.log(newMessage);
+
+
   const apiKey = "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C"
   const headers = new Headers();
   headers.append("x-api-key", apiKey);
@@ -147,7 +163,7 @@ const Chatroom = (props) => {
                           onChange={e => setNewMessage(e.target.value)}
                         />
  
-      <select value={selectedValue} onChange={handleChange2}>
+      <select value={selectedValue} onChange={(e) => handleChange2(e)}>
       <option value=" ">Select</option>
       {dropdowndata.map(option => (
         <option key={option.category} value={option.category}>{option.category}</option>
