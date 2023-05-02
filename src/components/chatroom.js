@@ -104,8 +104,8 @@ const Chatroom = (props) => {
         sendMessage(session, translatedMessage);
     }
 
-const handleChange2 = (event) => {
-    setSelectedValue(event.target.value);
+const handleChange2 = (e) => {
+    setSelectedValue(e.target.value);
     const urlq = `https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/softphoneqna?category=${e.target.value}`;
     const headers = new Headers();
     headers.append("x-api-key", "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C");
