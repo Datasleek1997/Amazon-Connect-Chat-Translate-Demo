@@ -13,7 +13,7 @@ const Chatroom = (props) => {
   const [languageTranslate] = useGlobalState("languageTranslate");
   const [languageOptions] = useGlobalState("languageOptions");
   const [dropdowndata, setDropdowndata] = useState([]);
-  const[loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const agentUsername = "AGENT";
   const messageEl = useRef(null);
   const input = useRef(null);
@@ -113,7 +113,8 @@ const Chatroom = (props) => {
     setLoading(false);
   }
   const handleChange2 = (e) => {
-    setSelectedValue(e.target.value);
+    setTimeout(() => {
+      setSelectedValue(e.target.value);
     const urlq = `https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/softphoneqna?category=${e.target.value}`;
     const headers = new Headers();
     headers.append("x-api-key", "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C");
@@ -127,6 +128,8 @@ const Chatroom = (props) => {
       .then((json) => setNewMessage(json.items.reply))
 
       .catch((error) => console.error(error));
+    }, 2000);
+    
   };
 
   const apiKey = "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C";
@@ -145,7 +148,10 @@ const Chatroom = (props) => {
       .then((json) => setDropdowndata(json.msg.Items))
       .catch((error) => console.error(error));
   }, []);
-
+  const valueData = [];
+  for (const element of dropdowndata) {
+    valueData.push(element.category);
+  }
   return (
     <>
       <div className="chatroom">
@@ -174,7 +180,21 @@ const Chatroom = (props) => {
             onChange={(e) => setNewMessage(e.target.value)}
           />
 
-          <select
+          <datalist id="suggestions">
+            {valueData.sort().map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </datalist>
+          <input
+            autoComplete="on"
+            list="suggestions"
+            placeholder="select"
+            onChange={(e) => handleChange2(e)}
+          />
+
+          {/* <select
             value={selectedValue}
             onChange={(e) => handleChange2(e)}
             style={{
@@ -185,14 +205,14 @@ const Chatroom = (props) => {
             }}
           >
             <option value=" ">Select</option>
-            {dropdowndata.map((option) => (
-              <option key={option.category} value={option.category}>
-                {option.category}
+            {valueData.sort().map((option) => (
+              <option key={option} value={option}>
+                {option}
               </option>
             ))}
-          </select>
+          </select> */}
 
-          <input type="submit" value={loading?"loading......":"Submit"} />
+          <input type="submit" value={loading ? "loading......" : "Submit"} />
         </form>
       </div>
     </>
