@@ -172,16 +172,10 @@ const Chatroom = (props) => {
           }
         </ul>
         <form className="input" onSubmit={handleSubmit}>
-          // <input
-          //   ref={input}
-          //   maxLength="1024"
-          //   type="text"
-          //   value={newMessage}
-          //   onChange={(e) => setNewMessage(e.target.value)}
-          // />
-          <textarea
-            rows="2"
-            cols="25 "
+          <input
+            ref={input}
+            maxLength="1024"
+            type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />
