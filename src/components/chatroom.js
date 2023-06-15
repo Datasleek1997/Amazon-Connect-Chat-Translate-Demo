@@ -51,7 +51,6 @@ const Chatroom = (props) => {
 
   async function handleSubmit(event) {
     setLoading(true);
-    setLoading(false);
     event.preventDefault();
     // if there is no text in the the chat input box, do nothing.
     if (newMessage === "") {
@@ -111,24 +110,26 @@ const Chatroom = (props) => {
       return value;
     }
     sendMessage(session, translatedMessage);
+    setLoading(false);
   }
   const handleChange2 = (e) => {
     setTimeout(() => {
       setSelectedValue(e.target.value);
-      const urlq = `https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/softphoneqna?category=${e.target.value}`;
-      const headers = new Headers();
-      headers.append("x-api-key", "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C");
-      const request = new Request(urlq, {
-        method: "GET",
-        headers: headers,
-      });
+    const urlq = `https://betqoq75b6.execute-api.us-east-1.amazonaws.com/production/softphoneqna?category=${e.target.value}`;
+    const headers = new Headers();
+    headers.append("x-api-key", "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C");
+    const request = new Request(urlq, {
+      method: "GET",
+      headers: headers,
+    });
 
-      fetch(request)
-        .then((response) => response.json())
-        .then((json) => setNewMessage(json.items.reply))
+    fetch(request)
+      .then((response) => response.json())
+      .then((json) => setNewMessage(json.items.reply))
 
-        .catch((error) => console.error(error));
+      .catch((error) => console.error(error));
     }, 2000);
+    
   };
 
   const apiKey = "AzP1YtY7VF24pdQPqgbhNaeMi2vbrzWk9H25mS9C";
@@ -171,16 +172,10 @@ const Chatroom = (props) => {
           }
         </ul>
         <form className="input" onSubmit={handleSubmit}>
-          {/* <input
+          <input
             ref={input}
             maxLength="1024"
             type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          /> */}
-          <textarea
-            rows="2"
-            cols="25 "
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />
