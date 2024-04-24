@@ -17,6 +17,7 @@ const Chatroom = (props) => {
   const agentUsername = "AGENT";
   const messageEl = useRef(null);
   const input = useRef(null);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
 
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
@@ -35,6 +36,9 @@ const Chatroom = (props) => {
       message: content,
     });
     const { AbsoluteTime, Id } = awsSdkResponse.data;
+  };
+  const handleChange = (event) => {
+    setSelectedLanguage(event.target.value);
   };
 
   useEffect(() => {
@@ -73,7 +77,7 @@ const Chatroom = (props) => {
     let translatedMessageAPI = await translateTextAPI(
       newMessage,
       "en",
-      destLang.lang,
+      selectedLanguage,
       ["connectChatTranslate"]
     ); // Provide a custom terminology created outside of this deployment
     let translatedMessage = translatedMessageAPI.TranslatedText;
@@ -155,6 +159,12 @@ const Chatroom = (props) => {
   return (
     <>
       <div className="chatroom">
+       <h3>   <label htmlFor="language-select">Choose:</label>
+      <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+        <option value="">Select a language</option>
+        <option value="fr">French</option>
+        <option value="ja">Japanese</option>
+      </select>
         <h3>
           Translation - (
           {languageTranslate.map((lang) => {
