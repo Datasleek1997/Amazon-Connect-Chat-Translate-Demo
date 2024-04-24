@@ -159,12 +159,11 @@ const Chatroom = (props) => {
   return (
     <>
       <div className="chatroom">
-       <p>   <label htmlFor="language-select">Choose:</label> </p>
-      <select id="language-select" value={selectedLanguage} onChange={handleChange}>
-        <option value="">Select a language</option>
-        <option value="fr">French</option>
-        <option value="ja">Japanese</option>
-      </select>
+      //  <p>   <label htmlFor="language-select">Choose:</label> </p>
+      // <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+      //   <option value="fr">French</option>
+      //   <option value="ja">Japanese</option>
+      // </select>
         <h3>
           Translation - (
           {languageTranslate.map((lang) => {
