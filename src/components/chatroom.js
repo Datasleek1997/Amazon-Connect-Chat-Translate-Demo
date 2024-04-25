@@ -17,7 +17,7 @@ const Chatroom = (props) => {
   const agentUsername = "AGENT";
   const messageEl = useRef(null);
   const input = useRef(null);
-  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
 
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
@@ -163,6 +163,7 @@ const Chatroom = (props) => {
      
         <h3>
      <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+    <option>Select a language</option>
         <option value="fr">French</option>
         <option value="ja">Japanese</option>
     <option value="es">Spanish</option>
