@@ -159,12 +159,18 @@ const Chatroom = (props) => {
   return (
     <>
       <div className="chatroom">
-      //  <p>   <label htmlFor="language-select">Choose:</label> </p>
-      // <select id="language-select" value={selectedLanguage} onChange={handleChange}>
-      //   <option value="fr">French</option>
-      //   <option value="ja">Japanese</option>
-      // </select>
+  
+     
         <h3>
+     <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+        <option value="fr">French</option>
+        <option value="ja">Japanese</option>
+    <option value="es">Spanish</option>
+    <option value="zh">Chinese</option>
+    <option value="en">English</option>
+    <option value="pt_br">Portuguese</option>
+    
+      </select>
           Translation - (
           {languageTranslate.map((lang) => {
             if (lang.contactId === currentContactId[0]) return lang.lang;
