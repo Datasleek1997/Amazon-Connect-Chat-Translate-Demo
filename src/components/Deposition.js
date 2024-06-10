@@ -45,20 +45,20 @@ function Deposition() {
     "https://928d9w8i2k.execute-api.us-east-1.amazonaws.com/production/suspendrecording";
 
   const startbuttonfnc = async (e) => {
-    console.log("startbtn")
+    console.log("start button clicked");
     e.preventDefault();
     //post request
     const myValue = localStorage.getItem("myKey");
     if (myValue) {
       //post method
-      const data = {
-        contactid: myValue,
-      };
-    }
+     
+    
     const response = await fetch(resume, {
       method: "POST",
 
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        contactid: myValue,
+      }),
     });
     const data = await response.json();
     if (data.body === "True") {
@@ -67,23 +67,25 @@ function Deposition() {
       alert("Recording not resume");
     }
     console.log(data);
+  }
   };
   const pausebuttonfnc = async (e) => {
-        console.log("pause")
+    console.log("pause button clicked");
     e.preventDefault();
     //post request
-
     const myValue = localStorage.getItem("myKey");
     if (myValue) {
       //post method
-      const data = {
-        contactid: myValue,
-      };
-    }
+    
+    
     const response = await fetch(pauseapi, {
       method: "POST",
 
-      body: JSON.stringify(data),
+      body: JSON.stringify(
+        {
+          contactid: myValue,
+        }
+      ),
     });
     const data = await response.json();
     if (data.body === "True") {
@@ -91,8 +93,10 @@ function Deposition() {
     } else {
       alert("Recording not paused");
     }
+    
     console.log(data);
   };
+}
   return (
     <>
       <div className="DepositionContainer">
