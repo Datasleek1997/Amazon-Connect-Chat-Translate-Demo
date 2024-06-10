@@ -98,7 +98,7 @@ function Deposition() {
         </div>
         <div className="controlsbutton">
           <button className='startButton' >
-            Start
+            Resume
           </button>
           <button className='pauseButton' >
             Pause
