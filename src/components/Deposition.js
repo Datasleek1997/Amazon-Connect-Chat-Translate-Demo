@@ -42,6 +42,7 @@ function Deposition() {
   return (
     <>
       <div className="DepositionContainer">
+       <div style={{"height":"70%"}}>
         <div className="Depositionheader">
           <p>Disposition</p>
         </div>
@@ -90,6 +91,23 @@ function Deposition() {
             </button>
           </div>
         )}
+          </div>
+          <div style={{height:"30%"}}>
+        <div className="Recordingcontrol" >
+          <p>Recording</p>
+        </div>
+        <div className="controlsbutton">
+          <button className='startButton' >
+            Start
+          </button>
+          <button className='pauseButton' >
+            Pause
+          </button>
+        </div>
+    
+      
+
+      </div>
       </div>
     </>
   );
