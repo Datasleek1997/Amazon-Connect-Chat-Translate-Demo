@@ -69,9 +69,10 @@ function Deposition() {
     console.log(data);
   };
   const pausebuttonfnc = async (e) => {
+        console.log("pause")
     e.preventDefault();
     //post request
-    console.log("pause")
+
     const myValue = localStorage.getItem("myKey");
     if (myValue) {
       //post method
