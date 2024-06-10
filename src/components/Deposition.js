@@ -39,6 +39,57 @@ function Deposition() {
   //   const sahil = "232332222";
   //   localStorage.setItem("myKey", sahil);
 
+  const resume =
+    "https://928d9w8i2k.execute-api.us-east-1.amazonaws.com/production/resumerecording";
+  const pauseapi =
+    "https://928d9w8i2k.execute-api.us-east-1.amazonaws.com/production/suspendrecording";
+
+  const startbuttonfnc = async (e) => {
+    e.preventDefault();
+    //post request
+    const myValue = localStorage.getItem("myKey");
+    if (myValue) {
+      //post method
+      const data = {
+        contactid: myValue,
+      };
+    }
+    const response = await fetch(resume, {
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    const data = await response.json();
+    if (data.body === "True") {
+      alert("Recording resume");
+    } else {
+      alert("Recording not resume");
+    }
+    console.log(data);
+  };
+  const pausebuttonfnc = async (e) => {
+    e.preventDefault();
+    //post request
+    const myValue = localStorage.getItem("myKey");
+    if (myValue) {
+      //post method
+      const data = {
+        contactid: myValue,
+      };
+    }
+    const response = await fetch(pauseapi, {
+      method: "POST",
+
+      body: JSON.stringify(data),
+    });
+    const data = await response.json();
+    if (data.body === "True") {
+      alert("Recording paused");
+    } else {
+      alert("Recording not paused");
+    }
+    console.log(data);
+  };
   return (
     <>
       <div className="DepositionContainer">
@@ -97,11 +148,11 @@ function Deposition() {
           <p>Recording</p>
         </div>
         <div className="controlsbutton">
-          <button className='startButton' >
-            Resume
-          </button>
-          <button className='pauseButton' >
+        <button className="pauseButton" onclick={pausebuttonfnc}>
             Pause
+          </button>
+          <button className="startButton" onClick={startbuttonfnc}>
+            Resume
           </button>
         </div>
     
