@@ -135,12 +135,54 @@ p {
 }
 
 .DepositionContainer{
-      height: 500px;
+    height: 500px;
     /* padding-top: 15px; */
     /* padding-left: 15px; */
+    display: flex;
     border: 2px solid grey;
+    gap: 1rem;
     width: 340px;
     background: white;
+    flex-direction: column;
+}
+.Recordingcontrol{
+  background-color: #236d0b;
+  color: #fff;
+  margin: 0;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.controlsbutton{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  height: 50%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.startButton{
+  background-color: #022968;
+  color: #fff;
+  border: none;
+  padding: 7px;
+  font-size: large;
+  border-radius:5px;
+  width:6rem;
+  cursor: pointer;
+}
+.pauseButton{
+  background-color: #022968;
+font-size: large;
+  color: #fff;
+  width:6rem;
+  border-radius:5px;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+
 }
 .Depositionheader{
   background-color: #dd7016;
