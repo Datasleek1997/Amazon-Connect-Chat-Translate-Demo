@@ -45,6 +45,7 @@ function Deposition() {
     "https://928d9w8i2k.execute-api.us-east-1.amazonaws.com/production/suspendrecording";
 
   const startbuttonfnc = async (e) => {
+    console.log("startbtn")
     e.preventDefault();
     //post request
     const myValue = localStorage.getItem("myKey");
@@ -70,6 +71,7 @@ function Deposition() {
   const pausebuttonfnc = async (e) => {
     e.preventDefault();
     //post request
+    console.log("pause")
     const myValue = localStorage.getItem("myKey");
     if (myValue) {
       //post method
