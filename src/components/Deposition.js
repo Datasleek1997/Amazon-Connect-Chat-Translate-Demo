@@ -155,7 +155,7 @@ function Deposition() {
           <p>Recording</p>
         </div>
         <div className="controlsbutton">
-        <button className="pauseButton" onclick={pausebuttonfnc}>
+        <button className="pauseButton" onClick={pausebuttonfnc}>
             Pause
           </button>
           <button className="startButton" onClick={startbuttonfnc}>
