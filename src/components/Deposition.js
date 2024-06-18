@@ -141,11 +141,32 @@ function Deposition() {
             >
               General Question
             </button>
+                
             <button value="Irop" onClick={(e) => DepositionHandleChnage(e)}>
               Irop
             </button>
             <button value="Others" onClick={(e) => DepositionHandleChnage(e)}>
               Others
+            </button>
+                <button
+              value="General inquiry to Air"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+             General inquiry to Air
+            </button>
+                                <button
+              value="Requesting to change Air"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+       Requesting to change Air
+            </button>
+                                <button
+              value="Requesting to cancel Air
+"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+            Requesting to cancel Air
+
             </button>
           </div>
         )}
