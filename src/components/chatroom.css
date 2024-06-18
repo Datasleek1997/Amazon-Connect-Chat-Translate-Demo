@@ -195,11 +195,15 @@ font-size: large;
   justify-content: center;
 }
 .DepositionCode{
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: start;
-  margin-top:14px;
+     display: flex;
+    flex-direction: column;
+    border: 1px solid #c7c3c3;
+    /* grid-gap: 8px; */
+    /* gap: 8px; */
+    overflow: auto;
+    height: 80%;
+    align-items: start;
+    margin-top: 14px;
 }
 
 .DepositionCode button{
