@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./chatroom.css";
 function Deposition() {
   const [loading, setLoading] = useState(false);
+   const [isActive, setIsActive] = useState(true);
   const Depositionurl =
     "https://t86a6l5lk4.execute-api.us-east-1.amazonaws.com/production";
   const DepositionHandleChnage = async (e) => {
@@ -62,9 +63,14 @@ function Deposition() {
     });
     const data = await response.json();
     if (data.body === "True") {
+      
       alert("Recording resume");
+          setIsActive(true)
+
     } else {
       alert("Recording not resume");
+          setIsActive(false)
+
     }
     console.log(data);
   }
@@ -89,9 +95,14 @@ function Deposition() {
     });
     const data = await response.json();
     if (data.body === "True") {
+          setIsActive(false)
+
       alert("Recording paused");
     } else {
       alert("Recording not paused");
+          setIsActive(true)
+
+      
     }
     
     console.log(data);
@@ -172,8 +183,8 @@ function Deposition() {
         )}
           </div>
           <div style={{height:"30%"}}>
-        <div className="Recordingcontrol" >
-          <p>Recording</p>
+       <div className={isActive ? "Recordingcontrol" : 'inactive'}>
+          <p>{isActive?"Recording":"Recording Stopped"}</p>
         </div>
         <div className="controlsbutton">
         <button className="pauseButton" onClick={pausebuttonfnc}>
