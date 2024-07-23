@@ -171,6 +171,7 @@ const Chatroom = (props) => {
     <option value="en">English</option>
     <option value="pt">Portuguese</option>
     <option value="de">German</option>
+    <option value="th">Thai</option>
     
       </select>
           Translation - (
