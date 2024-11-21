@@ -141,7 +141,7 @@ p {
     display: flex;
     border: 2px solid grey;
     gap: 1rem;
-    width: 340px;
+    width: 420px;
     background: white;
     flex-direction: column;
 }
