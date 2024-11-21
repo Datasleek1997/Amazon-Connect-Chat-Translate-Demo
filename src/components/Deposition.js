@@ -247,12 +247,7 @@ function Deposition() {
             >
               Change and modifications-Change Add room
             </button>
-            <button
-              value=" Change and modifications-Change  Add room "
-              onClick={(e) => DepositionHandleChnage(e)}
-            >
-              Change and modifications-Change Add room
-            </button>
+           
             <button
               value="  Change and modifications-Change  Add Activity  "
               onClick={(e) => DepositionHandleChnage(e)}
