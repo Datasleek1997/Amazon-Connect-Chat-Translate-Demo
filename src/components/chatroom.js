@@ -30,16 +30,12 @@ const Chatroom = (props) => {
     }
   }
   useEffect(() => {
-    // Automatically set the language when currentContactId changes
     const selectedLang = languageTranslate.find(
       (o) => o.contactId === currentContactId[0]
     );
-    if (selectedLang) {
-      setSelectedLanguage(selectedLang.lang);
-    } else {
-      setSelectedLanguage("en"); // Default to English if no match is found
-    }
+    setSelectedLanguage(selectedLang ? selectedLang.lang : "en"); // Default to English
   }, [currentContactId, languageTranslate]);
+  
   
 
   const sendMessage = async (session, content) => {
@@ -174,18 +170,24 @@ const Chatroom = (props) => {
   
      
         <h3>
-     <select id="language-select" value={selectedLanguage} onChange={handleChange}>
-    <option>Select a language</option>
-        <option value="fr">French</option>
-        <option value="ja">Japanese</option>
-    <option value="es">Spanish</option>
-    <option value="zh">Chinese</option>
-    <option value="en">English</option>
-    <option value="pt">Portuguese</option>
-    <option value="de">German</option>
-    <option value="th">Thai</option>
-    
-      </select>
+        <select
+  id="language-select"
+  value={selectedLanguage}
+  onChange={(event) => {
+    setSelectedLanguage(event.target.value);
+  }}
+>
+  <option value="">Select a language</option> {/* Default option */}
+  <option value="fr">French</option>
+  <option value="ja">Japanese</option>
+  <option value="es">Spanish</option>
+  <option value="zh">Chinese</option>
+  <option value="en">English</option>
+  <option value="pt">Portuguese</option>
+  <option value="de">German</option>
+  <option value="th">Thai</option>
+</select>
+
           Translation - (
           {languageTranslate.map((lang) => {
             if (lang.contactId === currentContactId[0]) return lang.lang;
