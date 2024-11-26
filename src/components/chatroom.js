@@ -29,6 +29,18 @@ const Chatroom = (props) => {
       return Object.keys(object).find((key) => object[key] === obj.lang);
     }
   }
+  useEffect(() => {
+    // Automatically set the language when currentContactId changes
+    const selectedLang = languageTranslate.find(
+      (o) => o.contactId === currentContactId[0]
+    );
+    if (selectedLang) {
+      setSelectedLanguage(selectedLang.lang);
+    } else {
+      setSelectedLanguage("en"); // Default to English if no match is found
+    }
+  }, [currentContactId, languageTranslate]);
+  
 
   const sendMessage = async (session, content) => {
     const awsSdkResponse = await session.sendMessage({
