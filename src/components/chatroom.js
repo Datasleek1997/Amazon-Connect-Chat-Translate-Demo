@@ -30,16 +30,6 @@ const Chatroom = (props) => {
     }
   }
 
-  useEffect(() => {
-    const currentLang = languageTranslate.find(
-      (lang) => lang.contactId === currentContactId[0]
-    )?.lang;
-  
-    if (currentLang) {
-      setSelectedLanguage(currentLang);
-    }
-  }, [languageTranslate, currentContactId]);
-  
   const sendMessage = async (session, content) => {
     const awsSdkResponse = await session.sendMessage({
       contentType: "text/plain",
@@ -155,20 +145,6 @@ const Chatroom = (props) => {
     method: "GET",
     headers: headers,
   });
-  const handleLanguageChange = (newLanguage) => {
-    setSelectedLanguage(newLanguage);
-  
-    // Optionally update languageTranslate or send updates to the backend
-    const updatedLanguageTranslate = languageTranslate.map((lang) =>
-      lang.contactId === currentContactId[0]
-        ? { ...lang, lang: newLanguage }
-        : lang
-    );
-  
-    // Update global state if necessary
-    // updateGlobalState('languageTranslate', updatedLanguageTranslate);
-  };
-  
 
   useEffect(() => {
     fetch(request)
@@ -186,22 +162,18 @@ const Chatroom = (props) => {
   
      
         <h3>
-        <select
-  id="language-select"
-  value={selectedLanguage}
-  onChange={(e) => handleLanguageChange(e.target.value)}
->
-  <option>Select a language</option>
-  <option value="fr">French</option>
-  <option value="ja">Japanese</option>
-  <option value="es">Spanish</option>
-  <option value="zh">Chinese</option>
-  <option value="en">English</option>
-  <option value="pt">Portuguese</option>
-  <option value="de">German</option>
-  <option value="th">Thai</option>
-</select>
-
+     <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+    <option>Select a language</option>
+        <option value="fr">French</option>
+        <option value="ja">Japanese</option>
+    <option value="es">Spanish</option>
+    <option value="zh">Chinese</option>
+    <option value="en">English</option>
+    <option value="pt">Portuguese</option>
+    <option value="de">German</option>
+    <option value="th">Thai</option>
+    
+      </select>
           Translation - (
           {languageTranslate.map((lang) => {
             if (lang.contactId === currentContactId[0]) return lang.lang;
