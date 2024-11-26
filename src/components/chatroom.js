@@ -17,7 +17,7 @@ const Chatroom = (props) => {
   const agentUsername = "AGENT";
   const messageEl = useRef(null);
   const input = useRef(null);
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
 
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
@@ -29,13 +29,17 @@ const Chatroom = (props) => {
       return Object.keys(object).find((key) => object[key] === obj.lang);
     }
   }
-  useEffect(() => {
-    const selectedLang = languageTranslate.find(
-      (o) => o.contactId === currentContactId[0]
-    );
-    setSelectedLanguage(selectedLang ? selectedLang.lang : "en"); // Default to English
-  }, [currentContactId, languageTranslate]);
 
+  useEffect(() => {
+    const currentLang = languageTranslate.find(
+      (lang) => lang.contactId === currentContactId[0]
+    )?.lang;
+  
+    if (currentLang) {
+      setSelectedLanguage(currentLang);
+    }
+  }, [languageTranslate, currentContactId]);
+  
   const sendMessage = async (session, content) => {
     const awsSdkResponse = await session.sendMessage({
       contentType: "text/plain",
@@ -44,12 +48,8 @@ const Chatroom = (props) => {
     const { AbsoluteTime, Id } = awsSdkResponse.data;
   };
   const handleChange = (event) => {
-
     setSelectedLanguage(event.target.value);
-    console.log(event.target.value,"sahiltest");
-    
   };
-console.log(selectedLanguage,"sahiltest2");
 
   useEffect(() => {
     // this ensures that the chat window will auto scoll to ensure the more recent message is in view
@@ -60,12 +60,12 @@ console.log(selectedLanguage,"sahiltest2");
       });
     }
     // this ensure that the input box has the focus on load and after each entry
-    //     input.current.focus();
+//     input.current.focus();
   }, []);
 
   async function handleSubmit(event) {
     setLoading(true);
-
+    
     event.preventDefault();
     // if there is no text in the the chat input box, do nothing.
     if (newMessage === "") {
@@ -155,6 +155,20 @@ console.log(selectedLanguage,"sahiltest2");
     method: "GET",
     headers: headers,
   });
+  const handleLanguageChange = (newLanguage) => {
+    setSelectedLanguage(newLanguage);
+  
+    // Optionally update languageTranslate or send updates to the backend
+    const updatedLanguageTranslate = languageTranslate.map((lang) =>
+      lang.contactId === currentContactId[0]
+        ? { ...lang, lang: newLanguage }
+        : lang
+    );
+  
+    // Update global state if necessary
+    // updateGlobalState('languageTranslate', updatedLanguageTranslate);
+  };
+  
 
   useEffect(() => {
     fetch(request)
@@ -169,22 +183,25 @@ console.log(selectedLanguage,"sahiltest2");
   return (
     <>
       <div className="chatroom">
+  
+     
         <h3>
-          <select
-            id="language-select"
-            value={selectedLanguage}
-            onChange={handleChange}
-          >
-            <option value="">Select a language</option> {/* Default option */}
-            <option value="fr">French</option>
-            <option value="ja">Japanese</option>
-            <option value="es">Spanish</option>
-            <option value="zh">Chinese</option>
-            <option value="en">English</option>
-            <option value="pt">Portuguese</option>
-            <option value="de">German</option>
-            <option value="th">Thai</option>
-          </select>
+        <select
+  id="language-select"
+  value={selectedLanguage}
+  onChange={(e) => handleLanguageChange(e.target.value)}
+>
+  <option>Select a language</option>
+  <option value="fr">French</option>
+  <option value="ja">Japanese</option>
+  <option value="es">Spanish</option>
+  <option value="zh">Chinese</option>
+  <option value="en">English</option>
+  <option value="pt">Portuguese</option>
+  <option value="de">German</option>
+  <option value="th">Thai</option>
+</select>
+
           Translation - (
           {languageTranslate.map((lang) => {
             if (lang.contactId === currentContactId[0]) return lang.lang;
@@ -201,7 +218,7 @@ console.log(selectedLanguage,"sahiltest2");
           }
         </ul>
         <form className="input" onSubmit={handleSubmit}>
-          {/* <input
+         {/* <input
             ref={input}
             maxLength="1024"
             type="text"
