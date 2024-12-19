@@ -18,8 +18,7 @@ const Chatroom = (props) => {
   const messageEl = useRef(null);
   const input = useRef(null);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
-  const [isProgrammaticChange, setIsProgrammaticChange] = useState(false);
-
+  const [isUserAction, setIsUserAction] = useState(false);
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
       (o) => o.contactId === currentContactId[0]
@@ -39,9 +38,8 @@ const Chatroom = (props) => {
     const { AbsoluteTime, Id } = awsSdkResponse.data;
   };
   const handleChange = (event) => {
-    setIsProgrammaticChange(false); // Reset the flag
-    setSelectedLanguage(event.target.value);
-    // setSelectedLanguage(event.target.value);
+    setSelectedLanguage(event.target.value); // Update the state
+    setIsUserAction(true); // Mark as user-initiated
   };
 
   useEffect(() => {
@@ -163,36 +161,37 @@ const Chatroom = (props) => {
     const detectedLanguage = languageTranslate.find(
       (lang) => lang.contactId === currentContactId[0]
     );
-
-    if (detectedLanguage && !isProgrammaticChange) {
-      setSelectedLanguage(detectedLanguage.lang); // Programmatically update dropdown
-      setIsProgrammaticChange(true); // Set the flag to avoid conflicts
+  
+    if (detectedLanguage && !isUserAction) {
+      setSelectedLanguage(detectedLanguage.lang); // Update dropdown when language changes
     }
-  }, [languageTranslate, currentContactId]);
+  }, [languageTranslate, currentContactId, isUserAction]);
+  
+  // Reset the user action flag after updating state
+  useEffect(() => {
+    if (isUserAction) {
+      const timer = setTimeout(() => setIsUserAction(false), 500); // Small delay to prevent interference
+      return () => clearTimeout(timer);
+    }
+  }, [isUserAction]);
+  
 
   return (
     <div className="chatroom">
       <h3>
-        <select
-          id="language-select"
-          value={selectedLanguage}
-          onChange={handleChange}
-        >
-          <option value="">Select a language</option>
-          <option value="fr">French</option>
-          <option value="ja">Japanese</option>
-          <option value="es">Spanish</option>
-          <option value="zh">Chinese</option>
-          <option value="en">English</option>
-          <option value="pt">Portuguese</option>
-          <option value="de">German</option>
-          <option value="th">Thai</option>
-        </select>
-        Translation - (
-        {languageTranslate.map((lang) => {
-          if (lang.contactId === currentContactId[0]) return lang.lang;
-        }) || "Not Selected"}
-        ) {getKeyByValue(languageOptions) || selectedLanguage}
+      <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+  <option value="">Select a language</option>
+  <option value="fr">French</option>
+  <option value="ja">Japanese</option>
+  <option value="es">Spanish</option>
+  <option value="zh">Chinese</option>
+  <option value="en">English</option>
+  <option value="pt">Portuguese</option>
+  <option value="de">German</option>
+  <option value="th">Thai</option>
+</select>
+
+Translation - {selectedLanguage || "Not Selected"}
       </h3>
       <ul className="chats" ref={messageEl}>
         {
