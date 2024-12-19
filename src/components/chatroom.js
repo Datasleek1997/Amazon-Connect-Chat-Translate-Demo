@@ -17,7 +17,8 @@ const Chatroom = (props) => {
   const agentUsername = "AGENT";
   const messageEl = useRef(null);
   const input = useRef(null);
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [isProgrammaticChange, setIsProgrammaticChange] = useState(false);
 
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
@@ -38,7 +39,9 @@ const Chatroom = (props) => {
     const { AbsoluteTime, Id } = awsSdkResponse.data;
   };
   const handleChange = (event) => {
+    setIsProgrammaticChange(false); // Reset the flag
     setSelectedLanguage(event.target.value);
+    // setSelectedLanguage(event.target.value);
   };
 
   useEffect(() => {
@@ -50,12 +53,12 @@ const Chatroom = (props) => {
       });
     }
     // this ensure that the input box has the focus on load and after each entry
-//     input.current.focus();
+    //     input.current.focus();
   }, []);
 
   async function handleSubmit(event) {
     setLoading(true);
-    
+
     event.preventDefault();
     // if there is no text in the the chat input box, do nothing.
     if (newMessage === "") {
@@ -157,78 +160,79 @@ const Chatroom = (props) => {
     valueData.push(element.category);
   }
   useEffect(() => {
-    // Detect language change for the current contact
     const detectedLanguage = languageTranslate.find(
       (lang) => lang.contactId === currentContactId[0]
     );
-  
-    if (detectedLanguage) {
-      setSelectedLanguage(detectedLanguage.lang); // Update the dropdown value
+
+    if (detectedLanguage && !isProgrammaticChange) {
+      setSelectedLanguage(detectedLanguage.lang); // Programmatically update dropdown
+      setIsProgrammaticChange(true); // Set the flag to avoid conflicts
     }
   }, [languageTranslate, currentContactId]);
-  
+
   return (
-    
-      <div className="chatroom">
-  
-     
-        <h3>
-        <select id="language-select" value={selectedLanguage} onChange={handleChange}>
-  <option value="">Select a language</option>
-  <option value="fr">French</option>
-  <option value="ja">Japanese</option>
-  <option value="es">Spanish</option>
-  <option value="zh">Chinese</option>
-  <option value="en">English</option>
-  <option value="pt">Portuguese</option>
-  <option value="de">German</option>
-  <option value="th">Thai</option>
-</select>
-      Translation - (
-          {languageTranslate.map((lang) => {
-            if (lang.contactId === currentContactId[0]) return lang.lang;
-          })}
-          ) {getKeyByValue(languageOptions)}
-        </h3>
-        <ul className="chats" ref={messageEl}>
-          {
-            // iterate over the Chats, and only display the messages for the currently active chat session
-            Chats.map((chat) => {
-              if (chat.contactId === currentContactId[0])
-                return <Message chat={chat} user={agentUsername} />;
-            })
-          }
-        </ul>
-        <form className="input" onSubmit={handleSubmit}>
-         {/* <input
+    <div className="chatroom">
+      <h3>
+        <select
+          id="language-select"
+          value={selectedLanguage}
+          onChange={handleChange}
+        >
+          <option value="">Select a language</option>
+          <option value="fr">French</option>
+          <option value="ja">Japanese</option>
+          <option value="es">Spanish</option>
+          <option value="zh">Chinese</option>
+          <option value="en">English</option>
+          <option value="pt">Portuguese</option>
+          <option value="de">German</option>
+          <option value="th">Thai</option>
+        </select>
+        Translation - (
+        {languageTranslate.map((lang) => {
+          if (lang.contactId === currentContactId[0]) return lang.lang;
+        }) || "Not Selected"}
+        ) {getKeyByValue(languageOptions) || selectedLanguage}
+      </h3>
+      <ul className="chats" ref={messageEl}>
+        {
+          // iterate over the Chats, and only display the messages for the currently active chat session
+          Chats.map((chat) => {
+            if (chat.contactId === currentContactId[0])
+              return <Message chat={chat} user={agentUsername} />;
+          })
+        }
+      </ul>
+      <form className="input" onSubmit={handleSubmit}>
+        {/* <input
             ref={input}
             maxLength="1024"
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />  */}
-          <textarea
-            rows="2"
-            cols="25"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-          />
+        <textarea
+          rows="2"
+          cols="25"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+        />
 
-          <datalist id="suggestions">
-            {valueData.sort().map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </datalist>
-          <input
-            autoComplete="on"
-            list="suggestions"
-            placeholder="select"
-            onChange={(e) => handleChange2(e)}
-          />
+        <datalist id="suggestions">
+          {valueData.sort().map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </datalist>
+        <input
+          autoComplete="on"
+          list="suggestions"
+          placeholder="select"
+          onChange={(e) => handleChange2(e)}
+        />
 
-          {/* <select
+        {/* <select
             value={selectedValue}
             onChange={(e) => handleChange2(e)}
             style={{
@@ -246,10 +250,9 @@ const Chatroom = (props) => {
             ))}
           </select> */}
 
-          <input type="submit" value={loading ? "loading......" : "Submit"} />
-        </form>
-      </div>
-    
+        <input type="submit" value={loading ? "loading......" : "Submit"} />
+      </form>
+    </div>
   );
 };
 
