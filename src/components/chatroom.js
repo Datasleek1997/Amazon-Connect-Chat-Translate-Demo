@@ -19,6 +19,8 @@ const Chatroom = (props) => {
   const input = useRef(null);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [isUserAction, setIsUserAction] = useState(false);
+  const userActionRef = useRef(false); // Ref to track user actions
+
   function getKeyByValue(object) {
     let obj = languageTranslate.find(
       (o) => o.contactId === currentContactId[0]
@@ -39,8 +41,9 @@ const Chatroom = (props) => {
   };
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value); // Update the state
-    setIsUserAction(true); // Mark as user-initiated
+    userActionRef.current = true; // Mark this as a user action
   };
+  
 
   useEffect(() => {
     // this ensures that the chat window will auto scoll to ensure the more recent message is in view
@@ -146,6 +149,7 @@ const Chatroom = (props) => {
     method: "GET",
     headers: headers,
   });
+  
 
   useEffect(() => {
     fetch(request)
@@ -162,18 +166,21 @@ const Chatroom = (props) => {
       (lang) => lang.contactId === currentContactId[0]
     );
   
-    if (detectedLanguage && !isUserAction) {
-      setSelectedLanguage(detectedLanguage.lang); // Update dropdown when language changes
+    if (detectedLanguage && !userActionRef.current) {
+      setSelectedLanguage(detectedLanguage.lang); // Update dropdown
     }
-  }, [languageTranslate, currentContactId, isUserAction]);
+  
+    // Reset userActionRef after a short delay
+    const timer = setTimeout(() => {
+      userActionRef.current = false;
+    }, 3000); // Adjust delay as needed
+  
+    return () => clearTimeout(timer); // Clean up the timer
+  }, [languageTranslate, currentContactId]);
+  
   
   // Reset the user action flag after updating state
-  useEffect(() => {
-    if (isUserAction) {
-      const timer = setTimeout(() => setIsUserAction(false), 500); // Small delay to prevent interference
-      return () => clearTimeout(timer);
-    }
-  }, [isUserAction]);
+ 
   
 
   return (
