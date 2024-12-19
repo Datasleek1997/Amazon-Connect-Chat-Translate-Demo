@@ -156,25 +156,35 @@ const Chatroom = (props) => {
   for (const element of dropdowndata) {
     valueData.push(element.category);
   }
+  useEffect(() => {
+    // Detect language change for the current contact
+    const detectedLanguage = languageTranslate.find(
+      (lang) => lang.contactId === currentContactId[0]
+    );
+  
+    if (detectedLanguage) {
+      setSelectedLanguage(detectedLanguage.lang); // Update the dropdown value
+    }
+  }, [languageTranslate, currentContactId]);
+  
   return (
-    <>
+    
       <div className="chatroom">
   
      
         <h3>
-     <select id="language-select" value={selectedLanguage} onChange={handleChange}>
-    <option>Select a language</option>
-        <option value="fr">French</option>
-        <option value="ja">Japanese</option>
-    <option value="es">Spanish</option>
-    <option value="zh">Chinese</option>
-    <option value="en">English</option>
-    <option value="pt">Portuguese</option>
-    <option value="de">German</option>
-    <option value="th">Thai</option>
-    
-      </select>
-          Translation - (
+        <select id="language-select" value={selectedLanguage} onChange={handleChange}>
+  <option value="">Select a language</option>
+  <option value="fr">French</option>
+  <option value="ja">Japanese</option>
+  <option value="es">Spanish</option>
+  <option value="zh">Chinese</option>
+  <option value="en">English</option>
+  <option value="pt">Portuguese</option>
+  <option value="de">German</option>
+  <option value="th">Thai</option>
+</select>
+      Translation - (
           {languageTranslate.map((lang) => {
             if (lang.contactId === currentContactId[0]) return lang.lang;
           })}
@@ -239,7 +249,7 @@ const Chatroom = (props) => {
           <input type="submit" value={loading ? "loading......" : "Submit"} />
         </form>
       </div>
-    </>
+    
   );
 };
 
