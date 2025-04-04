@@ -247,7 +247,6 @@ function Deposition() {
             >
               Change and modifications-Change Add room
             </button>
-           
             <button
               value="  Change and modifications-Change  Add Activity  "
               onClick={(e) => DepositionHandleChnage(e)}
@@ -329,7 +328,126 @@ function Deposition() {
             >
               Cancel Air-Fully Refundable
             </button>
-           
+            <button
+              value="Air – Change Flights"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Air – Change Flights
+            </button>
+            <button
+              value="Air – Schedule Change"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Air – Schedule Change
+            </button>
+            <button
+              value="Air – Cancel Flights"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Air – Cancel Flights
+            </button>
+            <button
+              value="Air – Chg/Cxl w/in 24 hrs of Booking"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Air – Chg/Cxl w/in 24 hrs of Booking
+            </button>
+            <button
+              value="Air – Seats, Baggage, or Other"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Air – Seats, Baggage, or Other
+            </button>
+            <button
+              value="Cancel – Refund Option Available"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Cancel – Refund Option Available
+            </button>
+            <button
+              value="Cancel – In Penalty or Non-Refundable"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Cancel – In Penalty or Non-Refundable
+            </button>
+            <button
+              value="Change – Dates, People, or Product"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Change – Dates, People, or Product
+            </button>
+            <button
+              value="Pre-Booking – Shopping or Error"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              Pre-Booking – Shopping or Error
+            </button>
+            <button
+              value="General Question "
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+              General Question 
+            </button>
+            <button
+              value="Air – Exchange"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+             Air – Exchange
+            </button>
+            <button
+              value="Air – Airline Policy or Exception"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+            Air – Airline Policy or Exception
+            </button>
+            <button
+              value="Air – Schedule Change"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+           Air – Schedule Change
+            </button>
+            <button
+              value="Fee Waiver Request"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+           Fee Waiver Request
+            </button>
+            <button
+              value="Follow-Up with Customer"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+            Follow-Up with Customer
+            </button>
+            <button
+              value="Confirmation Number"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+            Confirmation Number
+            </button>
+            <button
+              value="Hotel Check-In Issue or Request"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+           Hotel Check-In Issue or Request
+            </button>
+            <button
+              value="Car Pick-Up Issue"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+           Car Pick-Up Issue
+            </button>
+            <button
+              value="Activity Ticket or Supplier Issue"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+             Activity Ticket or Supplier Issue
+            </button>
+            <button
+              value="Flight or Airline Issue"
+              onClick={(e) => DepositionHandleChnage(e)}
+            >
+            Flight or Airline Issue
+            </button>
           </div>
         )}
       </div>
