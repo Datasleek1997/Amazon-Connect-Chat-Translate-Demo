@@ -16,10 +16,10 @@
     "react-scripts": "4.0.3",
     "semantic-ui-react": "^2.0.3",
     "web-vitals": "^2.0.1",
-     "@craco/craco": "^6.0.0",  // Latest stable version
-    "@semantic-ui-react/craco-less": "^1.3.0",  // Updated version
-    "less-loader": "^7.3.0",   // Works with webpack 4/5
-    "webpack": "^4.44.2 || ^5.0.0"  // Ensure compatibility
+     "@craco/craco": "^6.0.0",  
+    "@semantic-ui-react/craco-less": "^1.3.0", 
+    "less-loader": "^7.3.0",  
+    "webpack": "^4.44.2 || ^5.0.0"  
   },
   "scripts": {
     "start": "craco start",
