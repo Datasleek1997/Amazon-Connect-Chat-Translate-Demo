@@ -2,14 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Amplify from 'aws-amplify';
 import Predictions, { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
-import awsconfig from '../aws-exports';
+// import awsconfig from '../aws-exports';
 import Chatroom from './chatroom';
 import translateText from './translate'
 import detectText from './detectText'
 import { addChat, setLanguageTranslate, clearChat, useGlobalState, setCurrentContactId } from '../store/state';
 import Deposition from './Deposition';
 
-Amplify.configure(awsconfig);
+Amplify.configure({
+  Auth: {
+    Cognito: {
+      userPoolClientId: '5s3b7cjrltbordfs83flvnpht4',
+      userPoolId: 'us-east-1_YdtWFjYoF',
+    }
+  }
+});
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
 
