@@ -18,7 +18,7 @@
     "web-vitals": "^2.0.1",
      "@craco/craco": "^6.0.0",  
     "less-loader": "^7.3.0",  
-    "webpack": "^4.44.2 || ^5.0.0" ,
+    "webpack": "^4.44.2 || ^5.0.0" 
   },
   "resolutions": {
   "postcss-safe-parser": "6.0.0",
