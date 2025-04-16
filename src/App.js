@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import Auth from "@aws-amplify/auth";
 // import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
-import awsconfig from "./aws-exports";
+// import awsconfig from "./aws-exports";
 
 
 import "./App.css";
