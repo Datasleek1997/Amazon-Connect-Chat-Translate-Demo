@@ -19,8 +19,11 @@
      "@craco/craco": "^6.0.0",  
     "less-loader": "^7.3.0",  
     "webpack": "^4.44.2 || ^5.0.0" ,
-    "postcss": "^8.4.14",
   },
+  "resolutions": {
+  "postcss-safe-parser": "6.0.0",
+  "postcss": "8.4.21"
+},
   "scripts": {
     "start": "craco start",
     "build": "craco build",
